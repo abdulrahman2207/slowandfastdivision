@@ -1,0 +1,41 @@
+# Slow Division Algorithm (Long Division)
+def slow_division(dividend, divisor):
+    quotient = 0
+    remainder = dividend
+
+    while remainder >= divisor:
+        remainder -= divisor
+        quotient += 1
+
+    return quotient, remainder
+
+
+# Fast Division Algorithm (Newton-Raphson Algorithm)
+def fast_division(dividend, divisor, iterations=10):
+    # Initial approximation
+    approximation = 1.0 / divisor
+
+    for _ in range(iterations):
+        approximation = approximation * (2 - divisor * approximation)
+
+    quotient = dividend * approximation
+    remainder = dividend - quotient * divisor
+
+    return int(quotient), remainder
+
+
+# Example usage
+dividend = 42
+divisor = 5
+
+# Slow division
+quotient_slow, remainder_slow = slow_division(dividend, divisor)
+print("Slow Division:")
+print("Quotient:", quotient_slow)
+print("Remainder:", remainder_slow)
+
+# Fast division
+quotient_fast, remainder_fast = fast_division(dividend, divisor)
+print("\nFast Division:")
+print("Quotient:", quotient_fast)
+print("Remainder:", remainder_fast)
